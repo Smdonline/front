@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="jqui/jquery-ui.min.css">
+    <script src="jqui/external/jquery/jquery.js"></script>
+    <script src="jqui/jquery-ui.min.js"></script>
+    <style>
+        .selector{
+            min-height: 30px;
+            border: 1px solid black;
+            background-color: #003eff;
+            color:white;
+            display: flex;
+            justify-content: space-between;
+        }
+        .inizio{
+
+        }
+        .fine{
+
+
+        }
+        .center{
+
+        }
+    </style>
+</head>
+<body>
+<div class="selector"><span class="inizio">inizio</span> <span class="center">center</span> <span class="fine">fine</span></div>
+<div class="selector">misca</div>
+
+<script>
+    var step=25;
+    $('.selector').width(8*step);
+    $('.selector').height(step);
+
+
+    $( ".selector" ).draggable({
+        axis: "x,y",
+        grid: [ step,step],
+        drag: function( event, ui ) {
+
+            // Keep the left edge of the element
+            // at least 100 pixels from the container
+            $('.inizio').text(ui.position.left);
+        },
+        create: function( event, ui ) {
+            $('.center').text(step*8);
+            $('.inizio').text(step);
+            $('.fine').text(step*8);
+        }
+    });
+    $( ".selector" ).resizable({
+        handles: "w,e",
+        grid: [ step],
+        maxWidth: 12*4*step,
+        minWidth: step,
+        resize: function( event, ui ) {
+            $('.center').text(ui.size.width / (step*4) );
+            $('.fine').text(ui.position.right );
+        }
+    });
+</script>
+</body>
+</html>
