@@ -16,12 +16,12 @@
         }
         .dashed-grid-paper {
 
-            --grid-size: 25px;
+            --grid-size: 15px;
             --grid-strength: 1px;
             --grid-dash: 10px;
             --grid-gap: 5px;
-            --grid-color: #ddd;
-            --paper-color: #fff;
+            --grid-color: #000;
+            --paper-color: #ffc;
 
             background-color: var(--paper-color);
             background-size: var(--grid-dash) var(--grid-dash), var(--grid-size) var(--grid-size);
@@ -35,7 +35,15 @@
     </style>
 </head>
 <body>
+
 <div class="dashed-grid-paper">
+    <div class="selector">
+        <span class="inizio">inizio</span>
+        <span class="center">center</span>
+        <span class="fine">fine</span>
+    </div>
+
+</div><div class="dashed-grid-paper">
     <div class="selector">
         <span class="inizio">inizio</span>
         <span class="center">center</span>
@@ -47,10 +55,12 @@
 
 
 <script>
-    var step=25;
-    $('.selector').width(8*step);
+    var step=15;
+    var lungime=step*8;
+    var stanga = 25;
+    $('.selector').width(lungime);
     $('.selector').height(step);
-
+    lungime = lungime/(4*step);
 
     $( ".selector" ).draggable({
         axis: "x,y",
@@ -58,14 +68,12 @@
         containment: "parent",
         drag: function( event, ui ) {
 
-            // Keep the left edge of the element
-            // at least 100 pixels from the container
-            $('.inizio').text(parseInt(ui.position.left/100)+":"+parseFloat(ui.position.left%100));
+
+            $('.inizio').text(parseFloat(ui.position.left/(4*step)));
+            $('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
         },
         create: function( event, ui ) {
-            $('.center').text(step*8);
-            $('.inizio').text(step);
-            $('.fine').text(step*8);
+            $('.center').text(lungime);
         }
     });
     $( ".selector" ).resizable({
@@ -74,10 +82,17 @@
         maxWidth: 12*4*step,
         minWidth: step,
         containment: "parent",
-        resize: function( event, ui ) {
-            $('.center').text(ui.size.width / (step*4) );
-            $('.fine').text(ui.position.right );
+        resize: function (event, ui) {
+            $('.inizio').text(parseFloat(ui.position.left/(4*step)));
+            lungime = parseFloat(ui.size.width/(4*step));
+            $('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
+            $('.center').text(lungime);
+        },
+        create: function( event, ui ) {
+            ui.position.left=stanga;
+            lungime = ui.size.width/(4*step);
         }
+
     });
 </script>
 </body>
