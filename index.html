@@ -9,27 +9,42 @@
     <style>
         .selector{
             min-height: 30px;
-            border: 1px solid black;
             background-color: #003eff;
             color:white;
             display: flex;
             justify-content: space-between;
         }
-        .inizio{
+        .dashed-grid-paper {
 
+            --grid-size: 25px;
+            --grid-strength: 1px;
+            --grid-dash: 10px;
+            --grid-gap: 5px;
+            --grid-color: #ddd;
+            --paper-color: #fff;
+
+            background-color: var(--paper-color);
+            background-size: var(--grid-dash) var(--grid-dash), var(--grid-size) var(--grid-size);
+            background-image:
+                    linear-gradient(to bottom, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),
+                    linear-gradient(to right, var(--grid-color) var(--grid-strength), transparent var(--grid-strength)),
+                    linear-gradient(to right, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),
+                    linear-gradient(to bottom, var(--grid-color) var(--grid-strength), transparent var(--grid-strength));
         }
-        .fine{
 
-
-        }
-        .center{
-
-        }
     </style>
 </head>
 <body>
-<div class="selector"><span class="inizio">inizio</span> <span class="center">center</span> <span class="fine">fine</span></div>
-<div class="selector">misca</div>
+<div class="dashed-grid-paper">
+    <div class="selector">
+        <span class="inizio">inizio</span>
+        <span class="center">center</span>
+        <span class="fine">fine</span>
+    </div>
+
+</div>
+
+
 
 <script>
     var step=25;
@@ -40,11 +55,12 @@
     $( ".selector" ).draggable({
         axis: "x,y",
         grid: [ step,step],
+        containment: "parent",
         drag: function( event, ui ) {
 
             // Keep the left edge of the element
             // at least 100 pixels from the container
-            $('.inizio').text(ui.position.left);
+            $('.inizio').text(parseInt(ui.position.left/100)+":"+parseFloat(ui.position.left%100));
         },
         create: function( event, ui ) {
             $('.center').text(step*8);
@@ -57,6 +73,7 @@
         grid: [ step],
         maxWidth: 12*4*step,
         minWidth: step,
+        containment: "parent",
         resize: function( event, ui ) {
             $('.center').text(ui.size.width / (step*4) );
             $('.fine').text(ui.position.right );
