@@ -1,35 +1,20 @@
 .selector{
-    min-height: 30px;
-    background-color: #003eff;
+    min-height: 25px;
+    background-color: transparent;
+    background-image: linear-gradient(to right, blue, #070003,blue);
     color:white;
-    display: flex;
     justify-content: space-between;
+    display: inline-block;
 }
-/*.dashed-grid-paper {*/
-
-    /*--grid-size: 15px;*/
-    /*--grid-strength: 1px;*/
-    /*--grid-dash: 10px;*/
-    /*--grid-gap: 5px;*/
-    /*--grid-color: #000;*/
-    /*--paper-color: #ffc;*/
-
-    /*background-color: var(--paper-color);*/
-    /*min-height: 25px;*/
-    /*margin: 5px 0;*/
-    /*background-size: var(--grid-dash) var(--grid-dash), var(--grid-size) var(--grid-size);*/
-    /*background-image:*/
-            /*linear-gradient(to bottom, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),*/
-            /*linear-gradient(to right, var(--grid-color) var(--grid-strength), transparent var(--grid-strength)),*/
-            /*linear-gradient(to right, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),*/
-            /*linear-gradient(to bottom, var(--grid-color) var(--grid-strength), transparent var(--grid-strength));*/
-/*}*/
 
 .dashed-grid{
-    height: 25px;
+    height: 35px;
+    padding-top: 10px;
     background-color: transparent;
-    background-size: 25px 55px;
+    background-size: 20px 35px;
     background-repeat: repeat-x;
-    background-image: linear-gradient(to right, black 1px, transparent 1px);
-    background-position: 25px;
+    background-image: linear-gradient(to right, black 1px, transparent 1px),/*linee verticale*/
+                        linear-gradient(to bottom, black 1px, transparent 1px),/* linee in alto*/
+                        linear-gradient(to right, transparent 1px, rgba(204, 199, 178, 0.5) 1px);
+    display: flex;
 }
