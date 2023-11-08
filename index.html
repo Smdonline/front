@@ -6,94 +6,25 @@
     <link rel="stylesheet" href="jqui/jquery-ui.min.css">
     <script src="jqui/external/jquery/jquery.js"></script>
     <script src="jqui/jquery-ui.min.js"></script>
-    <style>
-        .selector{
-            min-height: 30px;
-            background-color: #003eff;
-            color:white;
-            display: flex;
-            justify-content: space-between;
-        }
-        .dashed-grid-paper {
 
-            --grid-size: 15px;
-            --grid-strength: 1px;
-            --grid-dash: 10px;
-            --grid-gap: 5px;
-            --grid-color: #000;
-            --paper-color: #ffc;
-
-            background-color: var(--paper-color);
-            background-size: var(--grid-dash) var(--grid-dash), var(--grid-size) var(--grid-size);
-            background-image:
-                    linear-gradient(to bottom, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),
-                    linear-gradient(to right, var(--grid-color) var(--grid-strength), transparent var(--grid-strength)),
-                    linear-gradient(to right, transparent var(--grid-gap), var(--paper-color) var(--grid-gap)),
-                    linear-gradient(to bottom, var(--grid-color) var(--grid-strength), transparent var(--grid-strength));
-        }
-
-    </style>
+    <link rel="stylesheet" href="home/css/index.css">
+    <script src="home/js/index.js"></script>
 </head>
 <body>
 
-<div class="dashed-grid-paper">
-    <div class="selector">
-        <span class="inizio">inizio</span>
-        <span class="center">center</span>
-        <span class="fine">fine</span>
-    </div>
+<!--<div class="dashed-grid-paper">-->
+    <!--<div class="selector">-->
+        <!--<span class="inizio">inizio</span>-->
+        <!--<span class="center">center</span>-->
+        <!--<span class="fine">fine</span>-->
+    <!--</div>-->
 
-</div><div class="dashed-grid-paper">
-    <div class="selector">
-        <span class="inizio">inizio</span>
-        <span class="center">center</span>
-        <span class="fine">fine</span>
-    </div>
+<!--</div>-->
 
-</div>
-
-
+<button id="btn">+</button>
 
 <script>
-    var step=15;
-    var lungime=step*8;
-    var stanga = 25;
-    $('.selector').width(lungime);
-    $('.selector').height(step);
-    lungime = lungime/(4*step);
 
-    $( ".selector" ).draggable({
-        axis: "x,y",
-        grid: [ step,step],
-        containment: "parent",
-        drag: function( event, ui ) {
-
-
-            $('.inizio').text(parseFloat(ui.position.left/(4*step)));
-            $('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
-        },
-        create: function( event, ui ) {
-            $('.center').text(lungime);
-        }
-    });
-    $( ".selector" ).resizable({
-        handles: "w,e",
-        grid: [ step],
-        maxWidth: 12*4*step,
-        minWidth: step,
-        containment: "parent",
-        resize: function (event, ui) {
-            $('.inizio').text(parseFloat(ui.position.left/(4*step)));
-            lungime = parseFloat(ui.size.width/(4*step));
-            $('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
-            $('.center').text(lungime);
-        },
-        create: function( event, ui ) {
-            ui.position.left=stanga;
-            lungime = ui.size.width/(4*step);
-        }
-
-    });
 </script>
 </body>
 </html>
