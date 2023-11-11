@@ -4,11 +4,27 @@
 $(document).ready(function () {
 
     function init_container() {
+        var row = $('<div \>',{
+            class: 'row-lineare'
+        }).appendTo('body');
+        var utils = $('<div \>',{
+            class: 'div-utils-leneare'
+        }).appendTo(row);
+
         var container=$('<div />',{
             class: "dashed-grid"
-        }).appendTo('body');
+        }).appendTo(row);
+        $('<span \>',{class: 'inizio',text:"inizio"}).appendTo(utils);
+        $('<span \>',{class: 'center',text:"center"}).appendTo(utils);
+        $('<span \>',{class: 'fine',text:"fine"}).appendTo(utils);
         container.on('dblclick',function () {
-            init_shift($(this));
+            if ($(this).children().length == 0){
+                init_shift($(this));
+            }
+            else {
+                alert("este deja un turno");
+            }
+
         })
     }
     function init_shift(parinte) {
@@ -17,9 +33,7 @@ $(document).ready(function () {
         var turno = $('<div \>',{
             class:'selector'
         });
-        $('<span \>',{class: 'inizio'}).appendTo(turno);
-        $('<span \>',{class: 'center'}).appendTo(turno);
-        $('<span \>',{class: 'fine'}).appendTo(turno);
+
         turno.width(lungime);
         turno.height(step);
         lungime = lungime/(4*step);
@@ -28,13 +42,13 @@ $(document).ready(function () {
                 grid: [ step],
                 containment: "parent",
                 drag: function( event, ui ) {
-
-
-                    $(this).find('.inizio').text(parseFloat(ui.position.left/(4*step)));
-                    $(this).find('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
+                    var utils = $(this).parent().siblings()[0];
+                    $(utils).find('.inizio').text(parseFloat(ui.position.left/(4*step)));
+                    $(utils).find('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
                 },
                 create: function( event, ui ) {
-                    $(this).find('.center').text(lungime);
+                    var utils = $(this).parent().siblings()[0];
+                    $(utils).find('.center').text(lungime);
                 }
             });
             turno.resizable({
@@ -44,10 +58,11 @@ $(document).ready(function () {
                 minWidth: step,
                 containment: "parent",
                 resize: function (event, ui) {
-                    $(this).find('.inizio').text(parseFloat(ui.position.left/(4*step)));
+                    var utils = $(this).parent().siblings()[0];
+                    $(utils).find('.inizio').text(parseFloat(ui.position.left/(4*step)));
                     lungime = parseFloat(ui.size.width/(4*step));
-                    $(this).find('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
-                    $(this).find('.center').text(lungime);
+                    $(utils).find('.fine').text(parseFloat((ui.position.left)/(4*step) + lungime));
+                    $(utils).find('.center').text(lungime);
                 }
 
             });

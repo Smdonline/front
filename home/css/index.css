@@ -3,7 +3,7 @@
     background-color: transparent;
     background-image: linear-gradient(to right, blue, #070003,blue);
     color:white;
-    justify-content: space-between;
+
     display: inline-block;
 }
 
@@ -17,4 +17,16 @@
                         linear-gradient(to bottom, black 1px, transparent 1px),/* linee in alto*/
                         linear-gradient(to right, transparent 1px, rgba(204, 199, 178, 0.5) 1px);
     display: flex;
+}
+.row-lineare{
+    display: grid;
+    grid-template-columns: 20% auto;
+
+}
+.div-utils-leneare{
+    display: flex;
+    justify-content: space-between;
+}
+.div-turni-lineare{
+    background-color: blue;
 }
